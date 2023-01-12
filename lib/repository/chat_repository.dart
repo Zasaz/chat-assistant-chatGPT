@@ -2,26 +2,20 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../core/constants/app_urls.dart';
 import 'package:http/http.dart' as http;
 
-class ChatRepository {
-  // Ref? ref;
-  // bool isLoading = false;
-
-  // callSendMessage(String? message) async {
-  //   final result = await sendMessage(message);
-  //   result.fold(
-  //     (l) => AppUtils().showToast('Cannot fetch message response', Colors.red),
-  //     (r) => AppUtils().showToast('Message response fetched', Colors.green),
-  //   );
-  //   notifyListeners();
-  // }
+class ChatRepository extends ChangeNotifier {
+  Ref? ref;
+  bool isLoading = false;
 
   Future sendMessage(
     String message,
   ) async {
+    isLoading = true;
+    notifyListeners();
     Map bodyData = {
       "model": "text-davinci-003",
       "prompt": message,
@@ -45,10 +39,14 @@ class ChatRepository {
     log('Body Response: ${httpResponse.body}');
 
     if (httpResponse.statusCode == 200) {
+      isLoading = false;
+      notifyListeners();
       var data = jsonDecode(httpResponse.body.toString());
       var msg = data['choices'][0]['text'];
       return msg;
     } else {
+      isLoading = false;
+      notifyListeners();
       return const ScaffoldMessenger(
         child: SnackBar(
           content: Text(
