@@ -1,6 +1,17 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../model/chat_message_model.dart';
 
-// final chatProvider =
-//     FutureProvider.family<ChatMessageModel, String>((ref, query) async {
-//   return ChatRepository().sendMessage(query);
-// });
+final chatNotifierProvider = ChangeNotifierProvider(
+  (ref) => ChatNotifier(),
+);
+
+class ChatNotifier extends ChangeNotifier {
+  final List<ChatMessageModel> messages = [];
+
+  clearMessages() {
+    messages.clear();
+    notifyListeners();
+  }
+}

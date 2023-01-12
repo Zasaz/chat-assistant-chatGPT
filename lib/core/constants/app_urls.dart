@@ -5,7 +5,7 @@ class AppUrls {
 
   static String baseUrl = 'https://api.openai.com/v1/completions';
   static String bearerToken =
-      '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';
+      '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'; // Replace your own key
 }
 
 String prettyJson(jsonObject) {

@@ -1,5 +1,6 @@
 import 'package:chat_bot/view/chat_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'core/observer/riverpod_observer.dart';
@@ -21,9 +22,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(
+      SystemUiMode.manual,
+      overlays: [],
+    );
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: ChatView(),
+      home: ChatGPTView(),
     );
   }
 }
