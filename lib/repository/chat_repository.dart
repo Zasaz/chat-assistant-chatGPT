@@ -16,11 +16,16 @@ class ChatRepository extends ChangeNotifier {
   ) async {
     isLoading = true;
     notifyListeners();
+
+    int requestLength = message.split(" ").length;
+    log('Message Length: $requestLength');
+    int maxTokens = requestLength * 300;
+
     Map bodyData = {
       "model": "text-davinci-003",
       "prompt": message,
       "temperature": 0,
-      "max_tokens": 100,
+      "max_tokens": maxTokens,
       "top_p": 1,
       "frequency_penalty": 0.0,
       "presence_penalty": 0.0,

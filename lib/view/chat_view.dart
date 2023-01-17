@@ -108,8 +108,7 @@ class _ChatViewState extends ConsumerState<ChatGPTView> {
                         fillColor: Colors.grey.shade100,
                         border: InputBorder.none,
                         hintText: 'Type your query',
-                        hintStyle: const TextStyle(
-                            fontSize: 14, fontStyle: FontStyle.italic),
+                        hintStyle: const TextStyle(fontSize: 14),
                       ),
                     ),
                   ),
@@ -201,7 +200,7 @@ class _ChatViewState extends ConsumerState<ChatGPTView> {
                 color: Colors.black,
                 fontWeight: type.index == 0 ? FontWeight.w500 : FontWeight.w400,
               ),
-              textAlign: TextAlign.start,
+              textAlign: TextAlign.justify,
             ),
           ),
         ),
